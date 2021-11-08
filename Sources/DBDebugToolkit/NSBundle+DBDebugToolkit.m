@@ -26,9 +26,11 @@
 @implementation NSBundle (DBDebugToolkit)
 
 + (instancetype)debugToolkitBundle {
-    NSBundle *podBundle = [NSBundle bundleForClass:[DBDebugToolkit class]];
-    NSURL *bundleURL = [podBundle URLForResource:@"DBDebugToolkit" withExtension:@"bundle"];
-    return [NSBundle bundleWithURL:bundleURL];
+#if SWIFT_PACKAGE
+    return DBDebugToolkit_DBDebugToolkit_SWIFTPM_MODULE_BUNDLE();
+#else
+    return [NSBundle bundleForClass:[DBDebugToolkit class]];
+#endif
 }
 
 @end
